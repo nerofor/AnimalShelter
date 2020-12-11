@@ -1,0 +1,51 @@
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/orm/hbm">
+    <class name="uni.eszterhazy.animalshelter.model.Animal" table="animals">
+        <id name="id" type="string" column="id"/>
+        <property name="name" type="string"/>
+        <property name="dateOfBirth" column="dateOfBirth" type="LocalDate"/>
+
+        <property name="type" column="type">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">uni.eszterhazy.animalshelter.model.Type</param>
+                <param name="useNamed">true</param>
+            </type>
+        </property>
+
+        <property name="gender" column="gender">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">uni.eszterhazy.animalshelter.model.Gender</param>
+                <param name="useNamed">true</param>
+            </type>
+        </property>
+
+        <property name="status" column="status">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">uni.eszterhazy.animalshelter.model.Status</param>
+                <param name="useNamed">true</param>
+            </type>
+        </property>
+
+        <property name="color" column="color">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">uni.eszterhazy.animalshelter.model.Color</param>
+                <param name="useNamed">true</param>
+            </type>
+        </property>
+
+        <property name="description" type="string"/>
+
+        <list name="skills" cascade="all" fetch="join">
+            <key column="animal" not-null="true"/>
+            <list-index column="idx"/>
+            <one-to-many class="uni.eszterhazy.animalshelter.model.Skill"/>
+        </list>
+    </class>
+
+    <class name="uni.eszterhazy.animalshelter.model.Skill" table="skills">
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="skill" type="string" not-null="true"/>
+        <property name="level" type="int"/>
+    </class>
+</hibernate-mapping>
