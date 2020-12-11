@@ -1,11 +1,11 @@
 package uni.eszterhazy.animalshelter.model;
 
 import uni.eszterhazy.animalshelter.exception.InvalidDateOfBirth;
-
 import java.time.LocalDate;
-import java.util.Collection;
+import java.time.Period;
 import java.util.List;
 import java.util.UUID;
+
 
 public class Animal {
     private String id;
@@ -23,14 +23,42 @@ public class Animal {
         this.id = UUID.randomUUID().toString();
     }
 
-    /* optional
-    public Animal(String name, Status status){
-
+    public Animal(String name, Status status, LocalDate dateOfBirth){
+        this();
+        this.name = name;
+        this.status = status;
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public Animal(String name, Type type, Gender gender, Status status){
+    public Animal(String name, Type type, Gender gender){
+        this();
+        this.name = name;
+        this.type = type;
+        this.gender = gender;
+    }
 
-    }*/
+    //public Animal(String name, Type type, Gender gender, String description){
+    //    this();
+    //    this(name, type, gender);
+    //    this.description = description;
+    //}
+
+    public Animal(String name, String description) {
+        this();
+        this.name = name;
+        this.description = description;
+    }
+
+    public Animal(String name, Type type, Gender gender, LocalDate dateOfBirth, Status status, Color color, String description) {
+        this();
+        this.name = name;
+        this.type = type;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+        this.status = status;
+        this.color = color;
+        this.description = description;
+    }
 
     public String getId() {
         return id;
@@ -138,6 +166,12 @@ public class Animal {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getAge(){
+        LocalDate currentDate = LocalDate.now();
+        int age = Period.between(dateOfBirth, currentDate).getYears();
+        return age;
     }
 
     @Override

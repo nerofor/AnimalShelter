@@ -1,13 +1,15 @@
 package uni.eszterhazy.animalshelter.dao.relational;
 import org.junit.Test;
 import uni.eszterhazy.animalshelter.dao.AnimalDAO;
+import uni.eszterhazy.animalshelter.dao.service.impl.AnimalServiceImpl;
 import uni.eszterhazy.animalshelter.exception.AnimalAlreadyAdded;
 import uni.eszterhazy.animalshelter.exception.InvalidDateOfBirth;
 import uni.eszterhazy.animalshelter.model.*;
+import uni.eszterhazy.animalshelter.service.AnimalService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.List;
 
 public class AnimalDAORelationalTest {
@@ -15,32 +17,24 @@ public class AnimalDAORelationalTest {
     @Test
     public void test() throws InvalidDateOfBirth, AnimalAlreadyAdded {
         AnimalDAO dao = new AnimalDAORelational();
-        Animal animal = new Animal();
+        AnimalService service = new AnimalServiceImpl(dao);
 
-        animal.setName("Jack");
-        animal.setColor(Color.OTHER);
-        animal.setGender(Gender.MALE);
-        animal.setDateOfBirth(LocalDate.of(2010,12,30));
-
-        //Skill s1 = new Skill("SIT", 10);
-        //Skill s2 = new Skill("HOUSE_TRAINED", 10);
-        Skill s3 = new Skill("CHILD_FRIENDLY", 7);
-
-        List skills = new ArrayList<>();
-        //skills.add(s1);
-        //skills.add(s2);
+        Animal animal = new Animal("Veronica", Type.DOG, Gender.FEMALE, LocalDate.of(2010,12,31),Status.ADOPTED ,Color.BROWN, "None.");
+        Skill s1 = new Skill("SIT", 3);
+        Skill s2 = new Skill("LIE", 7);
+        Skill s3 = new Skill("BARK", 6);
+        Skill s4 = new Skill(String.valueOf(Task.CHILD_FRIENDLY), 5);
+        List<Skill> skills = new ArrayList<>();
+        skills.add(s1);
+        skills.add(s2);
         skills.add(s3);
-
+        skills.add(s4);
         animal.setSkills(skills);
-
-        animal.setStatus(Status.TAKE_CARE);
-        animal.setType(Type.CAT);
-        animal.setDescription("None");
-
         //dao.createAnimal(animal);
         //System.out.println(dao.readAnimal(animal.getId()));
 
-        System.out.println(dao.readAllAnimalOfType(Type.CAT));
+        System.out.println("\nAverage age  of animals: "+service.getAverageAge());
+        System.out.println("\nAverage age of parrots: "+service.getAverageAgeOfType(Type.PARROT));
         //System.out.println(dao.readAllAnimalOfType(Type.DOG));
     }
 }

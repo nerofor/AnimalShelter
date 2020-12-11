@@ -15,8 +15,9 @@ public interface AnimalService {
     Collection<Animal> getAllAnimal();
     Animal getAnimalById(String id);
 
-    double averageAge();
-    double averageAgeOfType();
+    double getAverageAge();
+    double getAverageAgeOfType(Type type);
+
     Collection<Animal> getAllAnimalOfType(Type type);
     Collection<Animal> getAllAnimalOfGender(Gender gender);
     Animal getSkillOfAnimal(String id);

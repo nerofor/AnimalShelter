@@ -6,5 +6,6 @@ public enum Task {
     SEARCH,
     BARK,
     HOUSE_TRAINED,
-    CHILD_FRIENDLY
+    CHILD_FRIENDLY,
+    SPEAK
 }

@@ -9,10 +9,7 @@ import uni.eszterhazy.animalshelter.model.Animal;
 import uni.eszterhazy.animalshelter.model.Type;
 
 import org.hibernate.cfg.Configuration;
-
-import javax.persistence.Entity;
 import java.util.Collection;
-import java.util.List;
 
 public class AnimalDAORelational implements AnimalDAO {
     private static SessionFactory factory;
@@ -35,7 +32,7 @@ public class AnimalDAORelational implements AnimalDAO {
     @Override
     public Collection<Animal> readAllAnimal() {
         Session session = factory.openSession();
-        Collection<Animal> result = session.createQuery("FROM Animals").list();
+        Collection<Animal> result = session.createQuery("FROM Animal").list();
         return result;
     }
 
@@ -60,7 +57,6 @@ public class AnimalDAORelational implements AnimalDAO {
     public Collection<Animal> readAllAnimalOfType(Type type) {
         Session session = factory.openSession();
         String hql = "From Animal Where type=: type";
-        //String hql = "From Animal Where "+ String.valueOf(type) +" =: type";
 
         Query q = session.createQuery(hql);
         q.setParameter("type", type);
