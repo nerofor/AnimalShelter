@@ -4,6 +4,7 @@ import uni.eszterhazy.animalshelter.exception.InvalidDateOfBirth;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 public class Animal {
@@ -13,9 +14,9 @@ public class Animal {
     private Gender gender;
     private LocalDate dateOfBirth;
 
-    private Collection<Skill> skills;
+    private List<Skill> skills;
     private Status status;
-    private Collection<Color> colors;
+    private Color color;
     private String description;
 
     public Animal(){
@@ -30,6 +31,14 @@ public class Animal {
     public Animal(String name, Type type, Gender gender, Status status){
 
     }*/
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() { return name; }
 
@@ -52,7 +61,7 @@ public class Animal {
     public void setType(Type type) {
 
         if(type == this.type) {
-            //hibaüzenetet dob, mert ugyanazt akarom beállítani?
+            //hibaüzenetet dob, mert ugyanazt akarom beállítani!
         }
         else {
             this.type = type;
@@ -68,7 +77,7 @@ public class Animal {
     public void setGender(Gender gender) {
 
         if(gender == this.gender) {
-            //hibaüzenetet dob, mert ugyanazt akarom beállítani?
+            //hibaüzenetet dob, mert ugyanazt akarom beállítani!
         }
         else {
             this.gender = gender;
@@ -96,11 +105,11 @@ public class Animal {
 
 
 
-    public Collection<Skill> getSkills() {
+    public List<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(Collection<Skill> skills) {
+    public void setSkills(List<Skill> skills) {
         this.skills = skills;
     }
 
@@ -115,17 +124,13 @@ public class Animal {
         this.status = status;
     }
 
-
-
-    public Collection<Color> getColors() {
-        return colors;
+    public Color getColor() {
+        return color;
     }
 
-    public void setColors(Collection<Color> colors) {
-        this.colors = colors;
+    public void setColor(Color color) {
+        this.color = color;
     }
-
-
 
     public String getDescription() {
         return description;
@@ -135,5 +140,14 @@ public class Animal {
         this.description = description;
     }
 
-    /*ToString metódus felülírása?*/
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "name='" + name + '\'' +
+                ", type=" + type +
+                ", gender=" + gender +
+                ", status=" + status +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

@@ -1,13 +1,12 @@
 package uni.eszterhazy.animalshelter.model;
 
-public class Skill {
-    /*szobatiszta,
-    * engedelmes állat,
-    * gyerekbarát
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
-    HOUSE_TRAINED,
-    WELL_MANNERED_ANIMAL,
-    CHILD_FRIENDLY*/
+public class Skill {
+
+    private int id;
 
     private String skill;
     private int level;
@@ -19,7 +18,16 @@ public class Skill {
     public Skill(String skill, int level) {
         this.skill = skill;
         this.level = level;
+    }
 
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 
@@ -28,13 +36,14 @@ public class Skill {
     }
 
     public void setSkill(String skill) {
-        if(skill != null && skill != "")
+        if(skill != null)
         {this.skill = skill;
         }
         else {
             //throw exception!
         }
     }
+
 
     public int getLevel() {
         return level;
@@ -47,5 +56,13 @@ public class Skill {
         else{
             //throw exception!
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Skill{" +
+                "skill='" + skill + '\'' +
+                ", level=" + level +
+                '}';
     }
 }
