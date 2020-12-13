@@ -15,7 +15,6 @@ import uni.eszterhazy.animalshelter.model.Gender;
 import uni.eszterhazy.animalshelter.model.Type;
 import uni.eszterhazy.animalshelter.service.AnimalService;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,8 +34,6 @@ public class RESTAnimalController {
     @GetMapping(value = "animal/{id:[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}}")
     public Animal getAnimalById(@PathVariable(name = "id") String id) throws AnimalNotFound {
             return animalService.getAnimalById(id);
-
-
     }
 
     @ExceptionHandler(AnimalNotFound.class)
@@ -53,7 +50,7 @@ public class RESTAnimalController {
         //if(type == null && costPerDay == 0)
         //    return animalService.getAllAnimal();
 
-        //if(type != null && costPerDay > 0) //kell costPerDay mezőt!
+        //if(type != null && costPerDay > 0)
             //return animalService.getAllAnimalOfType(type).stream().filter(a -> a.getCostPerDay() > costPerDay).collect(Collectors.toList());
 
     /*Nem biztos, hogy jó!*/

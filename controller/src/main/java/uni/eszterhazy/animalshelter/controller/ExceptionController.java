@@ -19,7 +19,7 @@ public class ExceptionController {
     @ResponseBody
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public String methodNotAlloed(HttpRequestMethodNotSupportedException e) {
-        return "This method is allowed "+e.getMethod()+", use one of these"+e.getSupportedHttpMethods();
+        return "This method is not allowed "+e.getMethod()+", use one of these"+e.getSupportedHttpMethods();
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
@@ -41,7 +41,7 @@ public class ExceptionController {
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String unknowAnimalId(AnimalNotFound e) {
-        return "Animal id not found: "+e.getMessage();
+        return "Animal not found with id: "+e.getMessage();
     }
 
 }

@@ -1,9 +1,13 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@page isELIgnored="false"%>
 <html>
 <body>
-<h2>Hello Pussy Cat! ;)</h2>
-<form action="${pageContext.servletContext.contextPath}/animals">
-    <input type="submit" value="all animals">
+<h2>Animal Shelter Database</h2>
+
+<c:url var="action" value="/animals"></c:url>
+<form action="${action}">
+    <input type="submit" value="All animals"/>
 </form>
 </body>
 </html>

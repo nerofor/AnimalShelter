@@ -12,10 +12,10 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <bean id ="DBDAO" class="uni.eszterhazy.animalshelter.dao.relational.AnimalDAORelational"/>
+    <bean id ="AnimalDAO" class="uni.eszterhazy.animalshelter.relational.AnimalDAORelational"/>
 
-    <bean id="AnimalService" class="uni.eszterhazy.animalshelter.dao.service.impl.AnimalServiceImpl">
-        <constructor-arg ref="DBDAO"></constructor-arg>
+    <bean id="AnimalService" class="uni.eszterhazy.animalshelter.service.impl.AnimalServiceImpl">
+        <constructor-arg ref="AnimalDAO"></constructor-arg>
     </bean>
 </beans>
 

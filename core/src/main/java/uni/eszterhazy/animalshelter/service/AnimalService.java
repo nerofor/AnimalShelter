@@ -1,7 +1,6 @@
 package uni.eszterhazy.animalshelter.service;
 
-import uni.eszterhazy.animalshelter.exception.AnimalAlreadyAdded;
-import uni.eszterhazy.animalshelter.exception.AnimalNotFound;
+import uni.eszterhazy.animalshelter.exception.*;
 import uni.eszterhazy.animalshelter.model.*;
 
 import java.io.IOException;
@@ -11,8 +10,8 @@ import java.util.Collection;
 public interface AnimalService {
 
     void addAnimal(Animal animal) throws AnimalAlreadyAdded, AnimalNotFound, IOException;
-    void updateAnimal(Animal animal);
-    void deleteAnimal(Animal animal);
+    void updateAnimal(String id, String name, int costPerDay, LocalDate dateOfBirth, Status status, String description) throws NameNotNull, InvalidCostPerDay, InvalidDateOfBirth, StatusNotNull, AnimalNotFound;
+    void deleteAnimal(String id);
     Collection<Animal> getAllAnimal();
     Animal getAnimalById(String id) throws AnimalNotFound;
 
@@ -21,7 +20,9 @@ public interface AnimalService {
 
     Collection<Animal> getAllAnimalOfType(Type type);
     Collection<Animal> getAllAnimalOfGender(Gender gender);
-    Animal getSkillOfAnimal(String id);
+    Collection<Animal> getAllAnimalOfTypeAndGender(Type type, Gender gender);
+
+    /*Animal getSkillOfAnimal(String id);
     Animal youngestAnimal(String id);
     Animal oldestAnimal(String id);
     Animal adoptedAnimals();
@@ -32,5 +33,5 @@ public interface AnimalService {
     //Animal takeCareAnimals(Type type);
     Collection<Animal> birthBeetwenTwoDate(LocalDate start, LocalDate end);
     Collection<Animal> birthBeetwenTwoDateOfType(LocalDate start, LocalDate end, Type type);
-    Collection<Animal> getAllAnimalColor(Color color);
+    Collection<Animal> getAllAnimalColor(Color color);*/
 }

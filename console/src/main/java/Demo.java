@@ -1,12 +1,10 @@
 import uni.eszterhazy.animalshelter.dao.AnimalDAO;
-import uni.eszterhazy.animalshelter.dao.jason.AnimalDAOJSON;
-import uni.eszterhazy.animalshelter.dao.relational.AnimalDAORelational;
-import uni.eszterhazy.animalshelter.dao.service.impl.AnimalServiceImpl;
+import uni.eszterhazy.animalshelter.jason.AnimalDAOJSON;
+import uni.eszterhazy.animalshelter.service.impl.AnimalServiceImpl;
 import uni.eszterhazy.animalshelter.exception.InvalidDateOfBirth;
 import uni.eszterhazy.animalshelter.exception.NameNotNull;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class Demo {
     public static void main(String[] args) throws NameNotNull, InvalidDateOfBirth, IOException {
