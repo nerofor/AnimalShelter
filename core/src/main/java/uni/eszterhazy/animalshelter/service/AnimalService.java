@@ -9,11 +9,12 @@ import java.time.LocalDate;
 import java.util.Collection;
 
 public interface AnimalService {
+
     void addAnimal(Animal animal) throws AnimalAlreadyAdded, AnimalNotFound, IOException;
     void updateAnimal(Animal animal);
     void deleteAnimal(Animal animal);
     Collection<Animal> getAllAnimal();
-    Animal getAnimalById(String id);
+    Animal getAnimalById(String id) throws AnimalNotFound;
 
     double getAverageAge();
     double getAverageAgeOfType(Type type);

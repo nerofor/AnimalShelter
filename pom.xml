@@ -13,6 +13,9 @@
         <module>service</module>
         <module>dao_relational</module>
         <module>console</module>
+        <module>dao_json</module>
+        <module>controller</module>
+        <module>web</module>
     </modules>
     <dependencies>
         <dependency>

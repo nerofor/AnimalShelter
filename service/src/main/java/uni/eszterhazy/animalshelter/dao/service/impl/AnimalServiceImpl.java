@@ -12,6 +12,7 @@ import uni.eszterhazy.animalshelter.service.AnimalService;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 
 public class AnimalServiceImpl implements AnimalService {
@@ -19,6 +20,10 @@ public class AnimalServiceImpl implements AnimalService {
 
     public AnimalServiceImpl(AnimalDAO dao){
         this.dao = dao;
+    }
+
+    public AnimalServiceImpl() {
+
     }
 
     @Override
@@ -43,8 +48,8 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    public Animal getAnimalById(String id) {
-        return null;
+    public Animal getAnimalById(String id) throws AnimalNotFound {
+        return dao.readAnimal(id);
     }
 
     @Override
@@ -73,7 +78,9 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     public Collection<Animal> getAllAnimalOfType(Type type) {
-        return null;
+        Collection<Animal> animals = getAllAnimal();
+        Collection<Animal> result  = animals.stream().filter(a -> a.getType() == type).collect(Collectors.toList());
+        return result;
     }
 
     @Override

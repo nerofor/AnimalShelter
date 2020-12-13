@@ -1,17 +1,19 @@
 package uni.eszterhazy.animalshelter.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import uni.eszterhazy.animalshelter.exception.InvalidDateOfBirth;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import java.util.UUID;
 
-
 public class Animal {
     private String id;
     private String name;
     private Type type;
     private Gender gender;
+
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate dateOfBirth;
 
     private List<Skill> skills;
@@ -23,7 +25,7 @@ public class Animal {
         this.id = UUID.randomUUID().toString();
     }
 
-    public Animal(String name, Status status, LocalDate dateOfBirth){
+    public Animal(String name, Status status, @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate dateOfBirth){
         this();
         this.name = name;
         this.status = status;
@@ -49,7 +51,7 @@ public class Animal {
         this.description = description;
     }
 
-    public Animal(String name, Type type, Gender gender, LocalDate dateOfBirth, Status status, Color color, String description) {
+    public Animal(String name, Type type, Gender gender, @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) LocalDate dateOfBirth, Status status, Color color, String description) {
         this();
         this.name = name;
         this.type = type;
