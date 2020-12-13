@@ -1,7 +1,8 @@
 package uni.eszterhazy.animalshelter.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import uni.eszterhazy.animalshelter.exception.InvalidDateOfBirth;
+import uni.eszterhazy.animalshelter.exception.*;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -12,6 +13,7 @@ public class Animal {
     private String name;
     private Type type;
     private Gender gender;
+    private int costPerDay;
 
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate dateOfBirth;
@@ -72,10 +74,10 @@ public class Animal {
 
     public String getName() { return name; }
 
-    public void setName(String name) {
+    public void setName(String name) throws NameNotNull {
 
         if(name.trim().length() == 0) {
-            //hibaüzenetet dob!
+            throw new NameNotNull("Name not null! Please write a name.");
         }
         else {
             this.name = name;
@@ -88,14 +90,11 @@ public class Animal {
         return type;
     }
 
-    public void setType(Type type) {
-
-        if(type == this.type) {
-            //hibaüzenetet dob, mert ugyanazt akarom beállítani!
-        }
-        else {
+    public void setType(Type type) throws TypeNotNull {
+        if(type == null)
+            throw new TypeNotNull("Wrong value! Every animal have type. Please choose one in the list.");
+        else
             this.type = type;
-        }
     }
 
 
@@ -104,14 +103,11 @@ public class Animal {
         return gender;
     }
 
-    public void setGender(Gender gender) {
-
-        if(gender == this.gender) {
-            //hibaüzenetet dob, mert ugyanazt akarom beállítani!
-        }
-        else {
+    public void setGender(Gender gender) throws GenderNotNull {
+        if(gender == null)
+            throw new GenderNotNull("Wrong value! Every animal have gender. Please choose one in the list.");
+        else
             this.gender = gender;
-        }
     }
 
 
@@ -122,12 +118,10 @@ public class Animal {
 
     public void setDateOfBirth(LocalDate dateOfBirth) throws InvalidDateOfBirth {
         if(dateOfBirth.isAfter(LocalDate.now().minusMonths(6))){
-            //throw new exception to do not added animal that younger than 6 months.
-            throw new InvalidDateOfBirth("Do not added animal that younger than 6 months! Wrong date: " + dateOfBirth);
+            throw new InvalidDateOfBirth("Do not add animal that younger than 6 months! Wrong date: " + dateOfBirth);
         }
         if(dateOfBirth.isBefore(LocalDate.now().minusYears(10))) {
-            //throw new exception to do not added animal that younger than 10 years old.
-            throw new InvalidDateOfBirth("Do not added animal that older than 10 years old! Wrong date: " + dateOfBirth);
+            throw new InvalidDateOfBirth("Do not add animal that older than 10 years old! Wrong date: " + dateOfBirth);
         }
 
         this.dateOfBirth = dateOfBirth;
@@ -149,17 +143,35 @@ public class Animal {
         return status;
     }
 
-    public void setStatus(Status status) {
-        //mindenképp kell, hogy legyen státusza! Erre lehetne külön kivételt dobni!
-        this.status = status;
+    public void setStatus(Status status) throws StatusNotNull {
+        if(status == null)
+            throw new StatusNotNull("Wrong value! Every animal have status. Please choose one in the list.");
+        else
+            this.status = status;
     }
 
     public Color getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public void setColor(Color color) throws ColorNotNull {
+        if(color == null)
+            throw new ColorNotNull("Wrong value! Every animal have color. Please choose one in the list.");
+        else
+            this.color = color;
+    }
+
+
+    public int getCostPerDay() {
+        return costPerDay;
+    }
+
+    public void setCostPerDay(int costPerDay) throws InvalidCostPerDay {
+        if(costPerDay > 0 && costPerDay <= 15000)
+            this.costPerDay = costPerDay;
+        else
+            throw new InvalidCostPerDay("Do not add animal that which invalid value cost per day! Wrong value: "+this.getCostPerDay());
+
     }
 
     public String getDescription() {
@@ -182,6 +194,9 @@ public class Animal {
                 "name='" + name + '\'' +
                 ", type=" + type +
                 ", gender=" + gender +
+                ", costPerDay=" + costPerDay +
+                ", dateOfBirth=" + dateOfBirth +
+                ", skills=" + skills +
                 ", status=" + status +
                 ", description='" + description + '\'' +
                 '}';
