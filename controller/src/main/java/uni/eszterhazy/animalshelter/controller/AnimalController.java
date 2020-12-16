@@ -2,7 +2,6 @@ package uni.eszterhazy.animalshelter.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +32,7 @@ public class AnimalController {
         return new Animal();
     }
 
+    //OK!
     @GetMapping(value = "/animals")
     public ModelAndView getAnimals(Model model){
         ModelAndView mav = new ModelAndView("animalList");
@@ -41,20 +41,14 @@ public class AnimalController {
         return mav;
     }
 
-    /*@GetMapping("/animals")
-    public String getAnimals(Model model) {
-        model.addAttribute("animals", service.getAllAnimal());
-        return "animalList";
-    }*/
-
-    //!Model
+    //OK!
     @GetMapping("/animal/{id}")
     public String getAnimalById(@PathVariable String id, Model model) throws AnimalNotFound {
         model.addAttribute("animal", service.getAnimalById(id));
         return "animalDetails";
     }
 
-    @PostMapping(value="/animal/animalID")
+    @PostMapping(value="/animalID")
     public ModelAndView searchById(String id) throws AnimalNotFound {
         Animal result=service.getAnimalById(id);
         Collection<Animal> resultList=new ArrayList<Animal>();
@@ -65,43 +59,40 @@ public class AnimalController {
         return mav;
     }
 
-    /*@GetMapping(value = "/ujKocsi")
-    public String addBdForm(Model model){
-        model.addAttribute("Kategoria", Kategoria.values());
-        return "KocsiAdd";
-    }*/
 
-    /*nem tudom mit keres???
-    @GetMapping(value = "addAnimal")
+    @GetMapping(value = "/newAnimal")
     public String addAnimalForm(Model model) {
         model.addAttribute("status", Status.values());
-        return "animalForm.jsp";
-    }*/
+        return "animalForm";
+    }
 
-    @PostMapping(value = "addAnimal")
-    public String addAnimal(@ModelAttribute("animal") Animal animal, Model model) throws IOException {
+    @PostMapping(value = "/addAnimal")
+    public String addAnimal(@ModelAttribute("animal") Animal animal) {
         try {
             service.addAnimal(animal);
         } catch (AnimalAlreadyAdded animalAlreadyAdded) {
             animalAlreadyAdded.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         } catch (AnimalNotFound animalNotFound) {
             animalNotFound.printStackTrace();
         }
+
         return "redirect:animal/"+animal.getId();
     }
 
 
-    @GetMapping(value = "/modify/{id}")
+    @GetMapping(value = "/updateById/{id}")
     public String updateForm(@PathVariable String id,Model model) throws AnimalNotFound {
         Animal object=service.getAnimalById(id);
         model.addAttribute("newAnimal",object);
         model.addAttribute("Type", Type.values());
-        return "AnimalModify";
+        return "animalUpdate";
     }
 
 
     @PostMapping(value = "/update")
-    public String update(@ModelAttribute("newAnimal") Animal animal, Model model) {
+    public String update(@ModelAttribute("newAnimal") Animal animal) {
         try {
             service.updateAnimal(animal.getId(), animal.getName(), animal.getCostPerDay(), animal.getDateOfBirth(), animal.getStatus(), animal.getDescription());
         } catch (NameNotNull nameNotNull){
@@ -121,7 +112,7 @@ public class AnimalController {
         return "redirect:animal/" + animal.getId();
     }
 
-    @GetMapping(value = "/removeBd/{id}")
+    @GetMapping(value = "/deleteById/{id}")
     public String delete(@PathVariable String id) throws AnimalNotFound {
         service.deleteAnimal(id);
         return "redirect:/animals";
@@ -133,29 +124,4 @@ public class AnimalController {
         mav.addObject("animal",service.getAllAnimalOfType(type));
         return mav;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-    @Autowired
-    public AnimalController(AnimalService service) {
-        this.service = service;
-    }
-
-    @Autowired
-    public void setService() {
-        this.service = service;
-    }*/
 }

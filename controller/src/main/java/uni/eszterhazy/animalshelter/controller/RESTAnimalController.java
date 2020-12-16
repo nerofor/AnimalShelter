@@ -63,7 +63,6 @@ public class RESTAnimalController {
                 result.add(a);
             }
         }
-
         return result;
     }
 
