@@ -2,7 +2,7 @@
     <class name="uni.eszterhazy.animalshelter.model.Animal" table="animals">
         <id name="id" type="string" column="id"/>
         <property name="name" type="string"/>
-        <property name="date_of_birth" column="date_of_birth" type="LocalDate"/>
+        <property name="dateOfBirth" column="date_of_birth" type="LocalDate"/>
 
         <property name="type" column="type">
             <type name="org.hibernate.type.EnumType">
@@ -32,7 +32,7 @@
             </type>
         </property>
 
-        <property name="cost_per_day" type="int"/>
+        <property name="costPerDay" column="cost_per_day" type="int"/>
         <property name="description" type="string"/>
 
         <list name="skills" cascade="all" fetch="join">
