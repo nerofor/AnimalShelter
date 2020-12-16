@@ -23,6 +23,8 @@ public class Animal {
     private Color color;
     private String description;
 
+
+
     public Animal(){
         this.id = UUID.randomUUID().toString();
     }
@@ -41,12 +43,6 @@ public class Animal {
         this.gender = gender;
     }
 
-    //public Animal(String name, Type type, Gender gender, String description){
-    //    this();
-    //    this(name, type, gender);
-    //    this.description = description;
-    //}
-
     public Animal(String name, String description) {
         this();
         this.name = name;
@@ -64,6 +60,8 @@ public class Animal {
         this.description = description;
     }
 
+
+
     public String getId() {
         return id;
     }
@@ -71,6 +69,7 @@ public class Animal {
     public void setId(String id) {
         this.id = id;
     }
+
 
     public String getName() { return name; }
 
@@ -85,7 +84,6 @@ public class Animal {
     }
 
 
-
     public Type getType() {
         return type;
     }
@@ -98,7 +96,6 @@ public class Animal {
     }
 
 
-
     public Gender getGender() {
         return gender;
     }
@@ -109,7 +106,6 @@ public class Animal {
         else
             this.gender = gender;
     }
-
 
 
     public LocalDate getDateOfBirth() {
@@ -128,7 +124,6 @@ public class Animal {
     }
 
 
-
     public List<Skill> getSkills() {
         return skills;
     }
@@ -136,7 +131,6 @@ public class Animal {
     public void setSkills(List<Skill> skills) {
         this.skills = skills;
     }
-
 
 
     public Status getStatus() {
@@ -149,6 +143,7 @@ public class Animal {
         else
             this.status = status;
     }
+
 
     public Color getColor() {
         return color;
@@ -167,12 +162,13 @@ public class Animal {
     }
 
     public void setCostPerDay(int costPerDay) throws InvalidCostPerDay {
-        if(costPerDay > 0 && costPerDay <= 15000)
+        if(costPerDay >= 0 && costPerDay <= 15000)
             this.costPerDay = costPerDay;
         else
             throw new InvalidCostPerDay("Do not add animal that which invalid value cost per day! Wrong value: "+this.getCostPerDay());
 
     }
+
 
     public String getDescription() {
         return description;
@@ -181,6 +177,8 @@ public class Animal {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
 
     public int getAge(){
         LocalDate currentDate = LocalDate.now();

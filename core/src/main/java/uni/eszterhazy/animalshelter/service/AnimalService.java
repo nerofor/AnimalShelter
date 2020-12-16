@@ -19,11 +19,9 @@ public interface AnimalService {
     double getAverageAgeOfType(Type type);
 
     Collection<Animal> getAllAnimalOfType(Type type);
-    Collection<Animal> getAllAnimalOfGender(Gender gender);
-    Collection<Animal> getAllAnimalOfTypeAndGender(Type type, Gender gender);
 
-    /*Animal getSkillOfAnimal(String id);
-    Animal youngestAnimal(String id);
+    Collection<Skill> getSkillOfAnimalById(String id) throws AnimalNotFound;
+    /*Animal youngestAnimal(String id);
     Animal oldestAnimal(String id);
     Animal adoptedAnimals();
     //Animal adoptedAnimals(Type type);
