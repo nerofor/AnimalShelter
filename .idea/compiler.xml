@@ -13,9 +13,5 @@
         <module name="dao_relational" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="console" target="8" />
-      <module name="dao_json" target="8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

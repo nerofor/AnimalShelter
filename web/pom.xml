@@ -39,11 +39,11 @@
             <artifactId>controller</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!--<dependency>
+        <dependency>
             <groupId>uni.eszterhazy.animalshelter</groupId>
             <artifactId>service</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>uni.eszterhazy.animalshelter</groupId>
