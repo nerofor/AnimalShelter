@@ -12,6 +12,8 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/console/pom.xml" />
+        <option value="$PROJECT_DIR$/dao_json/pom.xml" />
         <option value="$PROJECT_DIR$/dao_mongo/pom.xml" />
         <option value="$PROJECT_DIR$/util/pom.xml" />
       </set>

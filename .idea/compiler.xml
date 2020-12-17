@@ -7,13 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="core" />
-        <module name="console" />
         <module name="controller" />
         <module name="web" />
         <module name="service" />
-        <module name="dao_json" />
         <module name="dao_relational" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="console" target="8" />
+      <module name="dao_json" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
