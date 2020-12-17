@@ -47,6 +47,7 @@ public class AnimalServiceImpl implements AnimalService {
         return dao.readAnimal(id);
     }
 
+    //??
     @Override
     public double getAverageAge() {
         Collection<Animal> animals = getAllAnimal();
@@ -57,6 +58,8 @@ public class AnimalServiceImpl implements AnimalService {
 
         return sum/ animals.size();
     }
+
+    //??
     @Override
     public double getAverageAgeOfType(Type type) {
         Collection<Animal> animals = getAllAnimal();
@@ -71,6 +74,7 @@ public class AnimalServiceImpl implements AnimalService {
         return sum/ animals.size();
     }
 
+    //??
     @Override
     public Collection<Animal> getAllAnimalOfType(Type type) {
         Collection<Animal> animals = getAllAnimal();
@@ -78,66 +82,23 @@ public class AnimalServiceImpl implements AnimalService {
         return result;
     }
 
+    //Ez tuti kelleni fog!
     @Override
-    public Collection<Animal> getAllAnimalOfGender(Gender gender) {
-        Collection<Animal> animals = getAllAnimal();
-        Collection<Animal> result  = animals.stream().filter(a -> a.getGender() == gender).collect(Collectors.toList());
+    public Collection<Skill> getSkillOfAnimalById(String id){
+        Collection<Skill> result = null;
+        try {
+            Animal animals = dao.readAnimal(id);
+
+            if(dao.readAnimal(id) != null) {
+                Animal a = dao.readAnimal(id);
+                result = dao.getAllSkillById(id);
+
+                result = a.getSkills();
+            }
+        } catch (AnimalNotFound animalNotFound) {
+            animalNotFound.printStackTrace();
+            return result;
+        }
         return result;
     }
-
-    @Override
-    public Collection<Animal> getAllAnimalOfTypeAndGender(Type type, Gender gender) {
-        Collection<Animal> animals = getAllAnimal();
-        for(Animal a: animals) {
-            if(a.getType() == type && a.getGender() == gender){
-                animals.add(a);
-            }
-        }
-        return animals;
-    }
-
-    /*@Override
-    public Animal getSkillOfAnimal(String id) {
-        return null;
-    }
-
-    @Override
-    public Animal youngestAnimal(String id) {
-        return null;
-    }
-
-    @Override
-    public Animal oldestAnimal(String id) {
-        return null;
-    }
-
-    @Override
-    public Animal adoptedAnimals() {
-        return null;
-    }
-
-    @Override
-    public Animal notifiedAnimals() {
-        return null;
-    }
-
-    @Override
-    public Animal takeCareAnimals() {
-        return null;
-    }
-
-    @Override
-    public Collection<Animal> birthBeetwenTwoDate(LocalDate start, LocalDate end) {
-        return null;
-    }
-
-    @Override
-    public Collection<Animal> birthBeetwenTwoDateOfType(LocalDate start, LocalDate end, Type type) {
-        return null;
-    }
-
-    @Override
-    public Collection<Animal> getAllAnimalColor(Color color) {
-        return null;
-    }*/
 }

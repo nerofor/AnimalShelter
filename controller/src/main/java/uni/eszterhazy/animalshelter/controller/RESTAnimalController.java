@@ -6,7 +6,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import uni.eszterhazy.animalshelter.exception.AnimalAlreadyAdded;
 import uni.eszterhazy.animalshelter.exception.AnimalNotFound;
 import uni.eszterhazy.animalshelter.exception.InvalidDateOfBirth;
@@ -18,6 +17,7 @@ import uni.eszterhazy.animalshelter.service.AnimalService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+
 
 @RestController
 @RequestMapping(value = "/rest/")
@@ -78,8 +78,16 @@ public class RESTAnimalController {
         return "Already added animal with id: " + animalAlreadyAdded.getMessage();
     }
 
-    /*@ExceptionHandler(InvalidDateOfBirth.class)
-    public String badRequest(InvalidDateOfBirth e) {
-        return e.getMessage();
-    }*/
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    public String methosNotAllowed(HttpRequestMethodNotSupportedException e) {
+        return "This method is not allowed "+e.getMethod()+", use one of these "+e.getSupportedHttpMethods();
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String badRequest(HttpMessageNotReadableException e) {
+        Throwable t = e.getCause().getCause();
+        return t.getClass().getSimpleName()+": "+t.getMessage();
+    }
 }

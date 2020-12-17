@@ -6,9 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import uni.eszterhazy.animalshelter.dao.AnimalDAO;
 import uni.eszterhazy.animalshelter.exception.*;
-import uni.eszterhazy.animalshelter.model.Animal;
-import uni.eszterhazy.animalshelter.model.Status;
-import uni.eszterhazy.animalshelter.model.Type;
+import uni.eszterhazy.animalshelter.model.*;
 
 import org.hibernate.cfg.Configuration;
 
@@ -22,12 +20,11 @@ public class AnimalDAORelational implements AnimalDAO {
     public AnimalDAORelational() {
         factory = new Configuration().configure().buildSessionFactory();
     }
-
-    //Itt még módosítani kell!
+    //The skills cannot add!
     @Override
     public void createAnimal(Animal animal) throws AnimalAlreadyAdded{
-        /*try{
-            System.out.println("valami...");
+        try{
+            animalSearchById(animal.getId());
         } catch (AnimalNotFound animalNotFound) {
             Session session = factory.openSession();
             Transaction tx = session.beginTransaction();
@@ -36,14 +33,14 @@ public class AnimalDAORelational implements AnimalDAO {
             tx.commit();
             session.close();
             return;
-        }*/
+        }
 
     }
 
     @Override
     public Collection<Animal> readAllAnimal() {
         Session session = factory.openSession();
-        Collection<Animal> animals = session.createQuery("FROM animals").list();
+        Collection<Animal> animals = session.createQuery("FROM Animal").list();
         return animals;
     }
 
@@ -84,6 +81,12 @@ public class AnimalDAORelational implements AnimalDAO {
         session.close();
     }
 
+    //NO OK!
+    @Override
+    public Collection<Skill> getAllSkillById(String id) {
+        return null;
+    }
+
     @Override
     public Collection<Animal> readAllAnimalOfType(Type type) {
         Session session = factory.openSession();
@@ -92,6 +95,21 @@ public class AnimalDAORelational implements AnimalDAO {
         Query q = session.createQuery(hql);
         q.setParameter("type", type);
         Collection result = q.list();
+        return result;
+    }
+
+    //NO OK!
+    @Override
+    public Collection<Animal> readAllAnimalOfTypeAndGender(Type type, Gender gender) {
+        return null;
+    }
+
+    private Animal animalSearchById(String id) throws AnimalNotFound {
+        Session session=factory.openSession();
+        if(session.get(Animal.class,id)==null){
+            throw  new AnimalNotFound(id);
+        }
+        Animal result=session.get(Animal.class,id);
         return result;
     }
 }
